@@ -1,0 +1,32 @@
+package org.example;
+
+public class Calculator {
+    private String formula;
+
+    Calculator(){
+        formula="";
+    }
+
+    Calculator(String str){
+        formula=str;
+    }
+
+    public boolean isCorrectSkobochka(String str){
+        if (str==""){//если пустая все верно
+            return true;
+        } else if (str.charAt(0)==')'||str.charAt(0)=='}'||str.charAt(0)==']') { //если начали с закрытой неверно
+            return false;
+        }
+        else{
+            Stack<String> g=new Stack<String>();
+            for (int i=0;i<str.length();i++){
+                if(str.charAt(i)=='('||str.charAt(i)=='{'||str.charAt(i)=='[')
+                {
+                    g.push(str.charAt(i))
+                }
+            }
+        }
+    }
+
+
+}

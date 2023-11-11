@@ -1,0 +1,82 @@
+package org.example;
+
+public class Stack<T> {
+    private class Node<T>{
+        T info;
+        Node<T> next;
+
+        Node(){
+            info=null;
+            next=null;
+        }
+
+        Node(T x){
+            info=x;
+            next=null;
+        }
+
+        @Override
+        public String toString(){
+
+            return info.toString();
+        }
+    }
+    private Node<T> top;
+    private int size;
+
+    Stack(){
+        top=null;
+        size=0;
+    }
+
+    public void push(T x){
+        Node<T> p=new Node<T>(x);
+        p.next=top;
+        top=p;
+        size++;
+    }
+
+    public T remove(){
+        if(top!=null) {
+            T x = top.info;
+            top = top.next;
+            size--;
+            return x;
+        }
+        else{
+            throw new IndexOutOfBoundsException();
+        }
+    }
+
+    public void overStack(){
+        Stack<T> q=new Stack<T>();
+        if(top==null||this==null){
+            return;
+        }
+        else{
+            while(top!=null){
+                q.push(this.remove());
+            }
+            top=q.top;
+        }
+    }
+
+    public int size(){
+        return size;
+    }
+
+    @Override
+    public String toString(){
+        if (top!=null){
+            T x= remove();
+            String str;
+            str=x+" "+ toString();
+            push(x);
+            return str;
+        }
+        else{
+            return "";
+        }
+    }
+
+}

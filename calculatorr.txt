@@ -1,0 +1,106 @@
+package com.company;
+
+public class Calculator {
+    private String formula;
+
+    Calculator(){
+        formula="";
+    }
+
+    Calculator(String str){
+        formula=str;
+    }
+
+    public boolean isCorrectSkobochka(String str){
+        if (str==""){//если пустая все верно
+            return true;
+        } else if (str.charAt(0)==')'||str.charAt(0)=='}'||str.charAt(0)==']') { //если начали с закрытой неверно
+            return false;
+        }
+        else{
+            Stack<Character> g=new Stack<Character>();
+            for (int i=0;i<str.length();i++){
+               switch(str.charAt(i)){
+                   case '(':
+                   case '{':
+                   case '[':{
+                       g.push(str.charAt(i));
+                       break;
+                   }
+                   case')':{
+                      if(g==null){//встретили закрывающуюся без открывающей
+                          return false;
+                      }
+                      else{
+                          Character x=g.remove();
+                          if(x!='('){
+                              return false;
+                          }
+                      }
+                      break;
+                   }
+                   case'}':{
+                       if(g==null){//встретили закрывающуюся без открывающей
+                           return false;
+                       }
+                       else{
+                           Character x=g.remove();
+                           if(x!='{'){
+                               return false;
+                           }
+                       }
+                       break;
+                   }
+                   case']':{
+                       if(g==null){//встретили закрывающуюся без открывающей
+                           return false;
+                       }
+                       else{
+                           Character x=g.remove();
+                           if(x!='['){
+                               return false;
+                           }
+                       }
+                       break;
+                   }
+                   default:{
+                       break;
+                   }
+               }
+
+            }
+            return true;
+        }
+    }
+
+    public boolean isCorrectInfix(String str){
+        if (str=="") {
+            return true;
+        }
+        else if(!isCorrectSkobochka(str)){
+            return false;
+        }
+        else{
+            String s="("+str+")";
+            Stack<String> g=new Stack<String>();
+            for (int i=0;i<s.length();i++){
+                switch(s.charAt(i)){
+                    case '(':
+                    case '{':
+                    case '[': {
+                        g.push(String.valueOf(s.charAt(i)));
+                        break;
+                    }
+                    case '+':{
+                        
+
+                    }
+                }
+            }
+
+        }
+
+    }
+
+
+}
